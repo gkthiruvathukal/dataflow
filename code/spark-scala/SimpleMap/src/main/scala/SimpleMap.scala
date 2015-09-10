@@ -56,6 +56,17 @@ object SimpleMap {
     Try{ outdir.mkdirs() } getOrElse(false)
   }
 
+  def add_vec3_insitu(arr : Array[Array[Double]], vec: Array[Double]): Unit = {
+    for (i <- 0 to arr.length)
+      for (j <- 0 to vec.length)
+        arr(i)(j) += vec(j)
+  }
+
+  def add_vec3_zipped(arr : Array[Array[Double]], vec: Array[Double]): Unit  = {
+    for (i <- 0 to arr.length)
+      arr(i) = (arr(i), vec).zipped.map(_ + _)
+  }
+
   def generate(x : Int, blockCount : Int) = {
     val seed = System.nanoTime() / (x+1)
     //np.random.seed(seed)
@@ -83,6 +94,9 @@ object SimpleMap {
       //outfile.write("gen_block_size: "+str(gen_block_size)+"\n")
       //outfile.write("total_data_size: "+str(gen_num_blocks*gen_block_size)+"\n")
       val A = rdd.map(x => generate(x, gen_block_count))
+
+      val 
+
     }
     println(config)
   }
